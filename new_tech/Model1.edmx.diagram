@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba4bc14a4e3d45ce841e57e9647fe704" Name="Diagram1">
+        <EntityTypeShape EntityType="new_techModel.Maerial_type_import_" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Materials_import_" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Materials_in_product_import_" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Partner_products_request_import_" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Partners_import_" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Product_type_import_" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Products_import_" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Type_partner_import_" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="new_techModel.Unit_measurement_import_" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="new_techModel.FK_Materials_import__Maerial_type_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Materials_import__Unit_measurement_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Materials_in_product_import__Materials_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Materials_in_product_import__Products_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Partner_products_request_import__Partners_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Partner_products_request_import__Products_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Partners_import__Type_partner_import_" ManuallyRouted="false" />
+        <AssociationConnector Association="new_techModel.FK_Products_import__Product_type_import_" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

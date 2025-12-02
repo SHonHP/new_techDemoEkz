@@ -1,0 +1,720 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище new_techModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Maerial_type_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" />
+          <Property Name="procent_braka_materials" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Materials_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_material" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="value_package" Type="int" />
+          <Property Name="id_unit_measurement" Type="int" />
+          <Property Name="cost" Type="float" />
+        </EntityType>
+        <EntityType Name="Materials_in_product_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="id_materials" Type="int" />
+        </EntityType>
+        <EntityType Name="Partner_products_request_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="id_partner" Type="int" />
+          <Property Name="value_product" Type="int" />
+        </EntityType>
+        <EntityType Name="Partners_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_partner" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="director" Type="nvarchar" MaxLength="80" />
+          <Property Name="email" Type="nvarchar" MaxLength="60" />
+          <Property Name="telephone" Type="nvarchar" MaxLength="10" />
+          <Property Name="adress_partner" Type="nvarchar" MaxLength="200" />
+          <Property Name="INN" Type="nvarchar" MaxLength="20" />
+          <Property Name="rating" Type="int" />
+        </EntityType>
+        <EntityType Name="Product_type_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="coefficient" Type="float" />
+        </EntityType>
+        <EntityType Name="Products_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_type_product" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="articul" Type="int" />
+          <Property Name="mincost_forpartner" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_partner_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Unit_measurement_import$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Materials_import$_Maerial_type_import$">
+          <End Role="Maerial_type_import$" Type="Self.Maerial_type_import$" Multiplicity="0..1" />
+          <End Role="Materials_import$" Type="Self.Materials_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maerial_type_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_import$">
+              <PropertyRef Name="id_type_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_import$_Unit_measurement_import$">
+          <End Role="Unit_measurement_import$" Type="Self.Unit_measurement_import$" Multiplicity="0..1" />
+          <End Role="Materials_import$" Type="Self.Materials_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit_measurement_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_import$">
+              <PropertyRef Name="id_unit_measurement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_in_product_import$_Materials_import$">
+          <End Role="Materials_import$" Type="Self.Materials_import$" Multiplicity="0..1" />
+          <End Role="Materials_in_product_import$" Type="Self.Materials_in_product_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_in_product_import$">
+              <PropertyRef Name="id_materials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_in_product_import$_Products_import$">
+          <End Role="Products_import$" Type="Self.Products_import$" Multiplicity="0..1" />
+          <End Role="Materials_in_product_import$" Type="Self.Materials_in_product_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_in_product_import$">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_products_request_import$_Partners_import$">
+          <End Role="Partners_import$" Type="Self.Partners_import$" Multiplicity="0..1" />
+          <End Role="Partner_products_request_import$" Type="Self.Partner_products_request_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partners_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partner_products_request_import$">
+              <PropertyRef Name="id_partner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_products_request_import$_Products_import$">
+          <End Role="Products_import$" Type="Self.Products_import$" Multiplicity="0..1" />
+          <End Role="Partner_products_request_import$" Type="Self.Partner_products_request_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partner_products_request_import$">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partners_import$_Type_partner_import$">
+          <End Role="Type_partner_import$" Type="Self.Type_partner_import$" Multiplicity="0..1" />
+          <End Role="Partners_import$" Type="Self.Partners_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_partner_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partners_import$">
+              <PropertyRef Name="id_type_partner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_import$_Product_type_import$">
+          <End Role="Product_type_import$" Type="Self.Product_type_import$" Multiplicity="0..1" />
+          <End Role="Products_import$" Type="Self.Products_import$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_type_import$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Products_import$">
+              <PropertyRef Name="id_type_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище new_techModelContainer">
+          <EntitySet Name="Maerial_type_import$" EntityType="Self.Maerial_type_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials_import$" EntityType="Self.Materials_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials_in_product_import$" EntityType="Self.Materials_in_product_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partner_products_request_import$" EntityType="Self.Partner_products_request_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partners_import$" EntityType="Self.Partners_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_type_import$" EntityType="Self.Product_type_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products_import$" EntityType="Self.Products_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_partner_import$" EntityType="Self.Type_partner_import$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit_measurement_import$" EntityType="Self.Unit_measurement_import$" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Materials_import$_Maerial_type_import$" Association="Self.FK_Materials_import$_Maerial_type_import$">
+            <End Role="Maerial_type_import$" EntitySet="Maerial_type_import$" />
+            <End Role="Materials_import$" EntitySet="Materials_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_import$_Unit_measurement_import$" Association="Self.FK_Materials_import$_Unit_measurement_import$">
+            <End Role="Unit_measurement_import$" EntitySet="Unit_measurement_import$" />
+            <End Role="Materials_import$" EntitySet="Materials_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_in_product_import$_Materials_import$" Association="Self.FK_Materials_in_product_import$_Materials_import$">
+            <End Role="Materials_import$" EntitySet="Materials_import$" />
+            <End Role="Materials_in_product_import$" EntitySet="Materials_in_product_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_in_product_import$_Products_import$" Association="Self.FK_Materials_in_product_import$_Products_import$">
+            <End Role="Products_import$" EntitySet="Products_import$" />
+            <End Role="Materials_in_product_import$" EntitySet="Materials_in_product_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_products_request_import$_Partners_import$" Association="Self.FK_Partner_products_request_import$_Partners_import$">
+            <End Role="Partners_import$" EntitySet="Partners_import$" />
+            <End Role="Partner_products_request_import$" EntitySet="Partner_products_request_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_products_request_import$_Products_import$" Association="Self.FK_Partner_products_request_import$_Products_import$">
+            <End Role="Products_import$" EntitySet="Products_import$" />
+            <End Role="Partner_products_request_import$" EntitySet="Partner_products_request_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partners_import$_Type_partner_import$" Association="Self.FK_Partners_import$_Type_partner_import$">
+            <End Role="Type_partner_import$" EntitySet="Type_partner_import$" />
+            <End Role="Partners_import$" EntitySet="Partners_import$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_import$_Product_type_import$" Association="Self.FK_Products_import$_Product_type_import$">
+            <End Role="Product_type_import$" EntitySet="Product_type_import$" />
+            <End Role="Products_import$" EntitySet="Products_import$" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="new_techModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Maerial_type_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="procent_braka_materials" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Materials_import_" Relationship="Self.FK_Materials_import__Maerial_type_import_" FromRole="Maerial_type_import_" ToRole="Materials_import_" />
+        </EntityType>
+        <EntityType Name="Materials_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_material" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value_package" Type="Int32" />
+          <Property Name="id_unit_measurement" Type="Int32" />
+          <Property Name="cost" Type="Double" />
+          <NavigationProperty Name="Maerial_type_import_" Relationship="Self.FK_Materials_import__Maerial_type_import_" FromRole="Materials_import_" ToRole="Maerial_type_import_" />
+          <NavigationProperty Name="Unit_measurement_import_" Relationship="Self.FK_Materials_import__Unit_measurement_import_" FromRole="Materials_import_" ToRole="Unit_measurement_import_" />
+          <NavigationProperty Name="Materials_in_product_import_" Relationship="Self.FK_Materials_in_product_import__Materials_import_" FromRole="Materials_import_" ToRole="Materials_in_product_import_" />
+        </EntityType>
+        <EntityType Name="Materials_in_product_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="id_materials" Type="Int32" />
+          <NavigationProperty Name="Materials_import_" Relationship="Self.FK_Materials_in_product_import__Materials_import_" FromRole="Materials_in_product_import_" ToRole="Materials_import_" />
+          <NavigationProperty Name="Products_import_" Relationship="Self.FK_Materials_in_product_import__Products_import_" FromRole="Materials_in_product_import_" ToRole="Products_import_" />
+        </EntityType>
+        <EntityType Name="Partner_products_request_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="id_partner" Type="Int32" />
+          <Property Name="value_product" Type="Int32" />
+          <NavigationProperty Name="Partners_import_" Relationship="Self.FK_Partner_products_request_import__Partners_import_" FromRole="Partner_products_request_import_" ToRole="Partners_import_" />
+          <NavigationProperty Name="Products_import_" Relationship="Self.FK_Partner_products_request_import__Products_import_" FromRole="Partner_products_request_import_" ToRole="Products_import_" />
+        </EntityType>
+        <EntityType Name="Partners_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_partner" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="director" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="adress_partner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="rating" Type="Int32" />
+          <NavigationProperty Name="Partner_products_request_import_" Relationship="Self.FK_Partner_products_request_import__Partners_import_" FromRole="Partners_import_" ToRole="Partner_products_request_import_" />
+          <NavigationProperty Name="Type_partner_import_" Relationship="Self.FK_Partners_import__Type_partner_import_" FromRole="Partners_import_" ToRole="Type_partner_import_" />
+        </EntityType>
+        <EntityType Name="Product_type_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="coefficient" Type="Double" />
+          <NavigationProperty Name="Products_import_" Relationship="Self.FK_Products_import__Product_type_import_" FromRole="Product_type_import_" ToRole="Products_import_" />
+        </EntityType>
+        <EntityType Name="Products_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_type_product" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="articul" Type="Int32" />
+          <Property Name="mincost_forpartner" Type="Double" />
+          <NavigationProperty Name="Materials_in_product_import_" Relationship="Self.FK_Materials_in_product_import__Products_import_" FromRole="Products_import_" ToRole="Materials_in_product_import_" />
+          <NavigationProperty Name="Partner_products_request_import_" Relationship="Self.FK_Partner_products_request_import__Products_import_" FromRole="Products_import_" ToRole="Partner_products_request_import_" />
+          <NavigationProperty Name="Product_type_import_" Relationship="Self.FK_Products_import__Product_type_import_" FromRole="Products_import_" ToRole="Product_type_import_" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_partner_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Partners_import_" Relationship="Self.FK_Partners_import__Type_partner_import_" FromRole="Type_partner_import_" ToRole="Partners_import_" />
+        </EntityType>
+        <EntityType Name="Unit_measurement_import_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Materials_import_" Relationship="Self.FK_Materials_import__Unit_measurement_import_" FromRole="Unit_measurement_import_" ToRole="Materials_import_" />
+        </EntityType>
+        <Association Name="FK_Materials_import__Maerial_type_import_">
+          <End Role="Maerial_type_import_" Type="Self.Maerial_type_import_" Multiplicity="0..1" />
+          <End Role="Materials_import_" Type="Self.Materials_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maerial_type_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_import_">
+              <PropertyRef Name="id_type_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_import__Unit_measurement_import_">
+          <End Role="Unit_measurement_import_" Type="Self.Unit_measurement_import_" Multiplicity="0..1" />
+          <End Role="Materials_import_" Type="Self.Materials_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit_measurement_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_import_">
+              <PropertyRef Name="id_unit_measurement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_in_product_import__Materials_import_">
+          <End Role="Materials_import_" Type="Self.Materials_import_" Multiplicity="0..1" />
+          <End Role="Materials_in_product_import_" Type="Self.Materials_in_product_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_in_product_import_">
+              <PropertyRef Name="id_materials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_in_product_import__Products_import_">
+          <End Role="Products_import_" Type="Self.Products_import_" Multiplicity="0..1" />
+          <End Role="Materials_in_product_import_" Type="Self.Materials_in_product_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Materials_in_product_import_">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_products_request_import__Partners_import_">
+          <End Role="Partners_import_" Type="Self.Partners_import_" Multiplicity="0..1" />
+          <End Role="Partner_products_request_import_" Type="Self.Partner_products_request_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partners_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partner_products_request_import_">
+              <PropertyRef Name="id_partner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_products_request_import__Products_import_">
+          <End Role="Products_import_" Type="Self.Products_import_" Multiplicity="0..1" />
+          <End Role="Partner_products_request_import_" Type="Self.Partner_products_request_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partner_products_request_import_">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partners_import__Type_partner_import_">
+          <End Role="Type_partner_import_" Type="Self.Type_partner_import_" Multiplicity="0..1" />
+          <End Role="Partners_import_" Type="Self.Partners_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_partner_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partners_import_">
+              <PropertyRef Name="id_type_partner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_import__Product_type_import_">
+          <End Role="Product_type_import_" Type="Self.Product_type_import_" Multiplicity="0..1" />
+          <End Role="Products_import_" Type="Self.Products_import_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_type_import_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Products_import_">
+              <PropertyRef Name="id_type_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Maerial_type_import_" EntityType="Self.Maerial_type_import_" />
+          <EntitySet Name="Materials_import_" EntityType="Self.Materials_import_" />
+          <EntitySet Name="Materials_in_product_import_" EntityType="Self.Materials_in_product_import_" />
+          <EntitySet Name="Partner_products_request_import_" EntityType="Self.Partner_products_request_import_" />
+          <EntitySet Name="Partners_import_" EntityType="Self.Partners_import_" />
+          <EntitySet Name="Product_type_import_" EntityType="Self.Product_type_import_" />
+          <EntitySet Name="Products_import_" EntityType="Self.Products_import_" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type_partner_import_" EntityType="Self.Type_partner_import_" />
+          <EntitySet Name="Unit_measurement_import_" EntityType="Self.Unit_measurement_import_" />
+          <AssociationSet Name="FK_Materials_import__Maerial_type_import_" Association="Self.FK_Materials_import__Maerial_type_import_">
+            <End Role="Maerial_type_import_" EntitySet="Maerial_type_import_" />
+            <End Role="Materials_import_" EntitySet="Materials_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_import__Unit_measurement_import_" Association="Self.FK_Materials_import__Unit_measurement_import_">
+            <End Role="Unit_measurement_import_" EntitySet="Unit_measurement_import_" />
+            <End Role="Materials_import_" EntitySet="Materials_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_in_product_import__Materials_import_" Association="Self.FK_Materials_in_product_import__Materials_import_">
+            <End Role="Materials_import_" EntitySet="Materials_import_" />
+            <End Role="Materials_in_product_import_" EntitySet="Materials_in_product_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_in_product_import__Products_import_" Association="Self.FK_Materials_in_product_import__Products_import_">
+            <End Role="Products_import_" EntitySet="Products_import_" />
+            <End Role="Materials_in_product_import_" EntitySet="Materials_in_product_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_products_request_import__Partners_import_" Association="Self.FK_Partner_products_request_import__Partners_import_">
+            <End Role="Partners_import_" EntitySet="Partners_import_" />
+            <End Role="Partner_products_request_import_" EntitySet="Partner_products_request_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_products_request_import__Products_import_" Association="Self.FK_Partner_products_request_import__Products_import_">
+            <End Role="Products_import_" EntitySet="Products_import_" />
+            <End Role="Partner_products_request_import_" EntitySet="Partner_products_request_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partners_import__Type_partner_import_" Association="Self.FK_Partners_import__Type_partner_import_">
+            <End Role="Type_partner_import_" EntitySet="Type_partner_import_" />
+            <End Role="Partners_import_" EntitySet="Partners_import_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_import__Product_type_import_" Association="Self.FK_Products_import__Product_type_import_">
+            <End Role="Product_type_import_" EntitySet="Product_type_import_" />
+            <End Role="Products_import_" EntitySet="Products_import_" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(new_techModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(new_techModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище new_techModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Maerial_type_import_">
+            <EntityTypeMapping TypeName="new_techModel.Maerial_type_import_">
+              <MappingFragment StoreEntitySet="Maerial_type_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="procent_braka_materials" ColumnName="procent_braka_materials" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials_import_">
+            <EntityTypeMapping TypeName="new_techModel.Materials_import_">
+              <MappingFragment StoreEntitySet="Materials_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_type_material" ColumnName="id_type_material" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="value_package" ColumnName="value_package" />
+                <ScalarProperty Name="id_unit_measurement" ColumnName="id_unit_measurement" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials_in_product_import_">
+            <EntityTypeMapping TypeName="new_techModel.Materials_in_product_import_">
+              <MappingFragment StoreEntitySet="Materials_in_product_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="id_materials" ColumnName="id_materials" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partner_products_request_import_">
+            <EntityTypeMapping TypeName="new_techModel.Partner_products_request_import_">
+              <MappingFragment StoreEntitySet="Partner_products_request_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="id_partner" ColumnName="id_partner" />
+                <ScalarProperty Name="value_product" ColumnName="value_product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partners_import_">
+            <EntityTypeMapping TypeName="new_techModel.Partners_import_">
+              <MappingFragment StoreEntitySet="Partners_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_type_partner" ColumnName="id_type_partner" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="director" ColumnName="director" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="adress_partner" ColumnName="adress_partner" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_type_import_">
+            <EntityTypeMapping TypeName="new_techModel.Product_type_import_">
+              <MappingFragment StoreEntitySet="Product_type_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products_import_">
+            <EntityTypeMapping TypeName="new_techModel.Products_import_">
+              <MappingFragment StoreEntitySet="Products_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_type_product" ColumnName="id_type_product" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="articul" ColumnName="articul" />
+                <ScalarProperty Name="mincost_forpartner" ColumnName="mincost_forpartner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="new_techModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_partner_import_">
+            <EntityTypeMapping TypeName="new_techModel.Type_partner_import_">
+              <MappingFragment StoreEntitySet="Type_partner_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unit_measurement_import_">
+            <EntityTypeMapping TypeName="new_techModel.Unit_measurement_import_">
+              <MappingFragment StoreEntitySet="Unit_measurement_import$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище new_techModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище new_techModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище new_techModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище new_techModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="new_techModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище new_techModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="new_techModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище new_techModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище new_techModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

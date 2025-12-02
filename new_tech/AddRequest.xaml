@@ -1,0 +1,49 @@
+﻿<Window x:Class="new_tech.AddRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:new_tech"
+        mc:Ignorable="d"
+        Title="ДобавлениеЗаявки" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Height="35" Content="Добавление заявки" Width="200" FontSize="24" FontFamily="Bahnschrift Light SemiCondensed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="1" Background="#BBDCFA" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" VerticalAlignment="Top" Width="460" Background="Black" BorderBrush="Black"/>
+            <Label Grid.Row="0" Height="25" Content="Тип партнера:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <ComboBox x:Name="TypePartner" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Width="150" Height="30" Margin="5" SelectionChanged="TypePartner_SelectionChanged" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <Label Grid.Row="1" Height="25" Content="Наименование:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <ComboBox x:Name="NamePartner" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Width="275" Height="30" Margin="5" SelectionChanged="NamePartner_SelectionChanged" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <Label Grid.Row="2" Height="25" Content="ФИО директора:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <TextBox x:Name="Director" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Width="275" Height="30" Margin="5" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <Label Grid.Row="3" Height="25" Content="Адресс:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <TextBox x:Name="Adres" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Width="275" Height="30" Margin="5" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <Label Grid.Row="4" Height="25" Content="Рейтинг:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <TextBox x:Name="rating" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Width="275" Height="30" Margin="5" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <Label Grid.Row="5" Height="25" Content="Телефон:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <TextBox x:Name="Telephon" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Width="275" Height="30" Margin="5" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <Label Grid.Row="6" Height="25" Content="Email:" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+            <TextBox x:Name="email" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Width="275" Height="30" Margin="5" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+        </Grid>
+        <Button x:Name="Back" Content="Назад" Grid.Row="2" Width="70" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 5 ,7, 7" Click="Back_Click" Background="#FF0C4882" FontFamily="Bahnschrift Light SemiCondensed" FontSize="14"/>
+        <Button x:Name="Add" Content="Добавить" Grid.Row="2" Width="150" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9, 5 ,7, 7" Click="Add_Click" Background="#FF0C4882" FontFamily="Bahnschrift Light SemiCondensed" FontSize="18"/>
+    </Grid>
+</Window>

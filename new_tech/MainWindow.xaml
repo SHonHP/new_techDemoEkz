@@ -1,0 +1,62 @@
+﻿<Window x:Class="new_tech.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:new_tech"
+        mc:Ignorable="d"
+        Title="New technologies" Loaded="Window_loaded" Height="500" Width="800" Icon="/res/Новые технологии.ico" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Image Margin="3,3,0,0" Grid.Row="0" Source="/res/Новые технологии.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Заявки партнеров" HorizontalAlignment="Center" FontSize="24" FontFamily="Bahnschrift Light SemiCondensed"/>
+        <Button Grid.Row="2" HorizontalAlignment="Right" Width="160" Height="30" Content="Создать заявку" FontSize="18" FontFamily="Bahnschrift Light SemiCondensed" Background="#0C4882" Margin="0, 0, 5, 0" Click="Button_Click"/>
+        <Button x:Name="Redact" Grid.Row="2" HorizontalAlignment="Right" Width="175" Height="30" Content="Редактировать заявку" FontSize="18" FontFamily="Bahnschrift Light SemiCondensed" Background="#0C4882" Margin="0, 0, 180, 0" Click="Redact_Click" />
+        <Button x:Name="ProductButton" Grid.Row="2" HorizontalAlignment="Center" Width="175" Height="30" Content="Выбрать продукцию" FontSize="18" FontFamily="Bahnschrift Light SemiCondensed" Background="#0C4882" Margin="0, 0, 115, 0" Click="ProductButton_Click" />
+
+        <ListBox x:Name="partnersList" SelectionChanged="partnersList_SelectionChanged" SelectedValuePath="id" Grid.Row="1" 
+                 Background="#FFBBDCFA" FontFamily="Bahnschrift Light SemiCondensed">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="#0C4882" Width="730" Height="90">
+                        <Grid Width="725" Height="80">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" FontSize="16" 
+                                       Text="{Binding Path=TypeName}" />
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="40,0,0,0" FontSize="16" 
+                                       Text="{Binding Path=PartnerName, StringFormat='| {0}'}"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,0,10,0" FontSize="16" 
+                                       Text="{Binding Path=TotalCost, StringFormat='Стоимость {0:F2}'}" HorizontalAlignment="Right" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" FontSize="12" 
+                                       Text="{Binding Path=UrAdress, StringFormat='Юридический адресс {0}'}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10,0,0,0" FontSize="12" 
+                                       Text="{Binding Path=Telephone, StringFormat='+7 {0}'}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" FontSize="12" 
+                                       Text="{Binding Path=Rating, StringFormat='Рейтинг: {0}'}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
